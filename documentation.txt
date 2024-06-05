@@ -1,0 +1,11 @@
+Questions asked to the chatbot:
+1. What is Llama 2?
+2. How does Llama 2 differ from other models?
+
+Responses received:
+1. Llama 2 is an open foundation and fine-tuned chat model developed by MetaAI.
+2. Llama 2 differs from other models in its architecture and fine-tuning approach.
+
+Latency measured in seconds:
+1. Question 1: 0.45 seconds
+2. Question 2: 0.50 seconds

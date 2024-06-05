@@ -1,0 +1,8 @@
+flask
+langchain-community==0.2.1
+langchain-core==0.2.1
+langchainhub
+pypdf
+sentence-transformers
+faiss-cpu
+llama-cpp-python
