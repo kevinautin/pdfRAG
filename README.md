@@ -1,6 +1,10 @@
 # chatbot
 
-# Install Llama2
+# Use OpenAI or Llama2
+
+.env
+
+# Install Llama2 locally
 
 git clone https://github.com/ggerganov/llama.cpp
 cd llama.cpp

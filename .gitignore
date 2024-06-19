@@ -1,5 +1,7 @@
 # Llama
 llama/
+data/
+chroma/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
