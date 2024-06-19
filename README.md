@@ -19,7 +19,7 @@ Save it into llama.cpp/models/
 
 # Text segmentation
 
-First, add the pdf document you want to query to `data/books`.
+First, add the pdf document you want to query to `pdf/` folder.
 
 To segment the text and create the vector embeddings, run
 `python create_database.py`
