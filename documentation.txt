@@ -1,17 +1,79 @@
+# Introduction
 
+This is the documentation for the pdf retrieval QA chatbot project given as homework.
+The project includes: 
+- Segmentation and vector embedding for the pdf content.
+- Large language models (Llama2 and OpenAI's).
+- Local database to save questions and answers and retrieve them.
+- REST API to interact with the bot.
+
+The text from the pdf file is segmented into chunks that are then turned into vector embeddings. Once the user inputs a question, string similarity is used to find the text chunks most similar to the question. Those text chunks are then provided as context for the LLM to answer the question. The response is saved in a local database.
+
+# Segmentation strategy
+
+The text is broken down into chunks using Langchain's text splitter function. At first, I tried to use small chunks (400 characters), having performance in mind. But I found that the performances were lackluster. The chunks selected by string similarity often didn't include enough context, and the model wasn't able to respond accurately, often hallucinating the answers. For that reason, I experimented with larger chunk sizes. Eventually, I settled with 1500 character per chunk, with 100 characters of overlap between chunks. 
+
+For the embedding, two models were used: HuggingFace embeddings (free to access), and OpenAI embeddings. The latter were found to perform better, but require access to OpenAI API. In this code, both options are available, and can be chosen simply by changing the `USE_OPENAI` line in the `.env` file.
+
+# Models
+
+At first, my implementation was using Llama2-7B-Chat as the LLM of choice. However, my personal laptop couldn't run the model locally in a reasonable time (around 50 minutes to answer a question). In order to be able to test and experiment faster, I changed it use OpenAI's API instead. The performance were greatly improved, both in terms of speed and quality of the answers. But the option to run the bot using Llama2 remains. It can be enabled simply by setting `USE_OPENAI` to `False` in `.env`.
+
+# Chat history design
+
+The assignment had an ambiguity regarding the purpose of the chat history database. I thought of two ways to interpret it:
+1. The chat history is saved into the database, and retrieved at each following call during the same session, to be used as past context for the model.
+2. The chat history is saved in the database so that the results can be checked even after a QA session is over. 
+
+It wasn't clear to me which of the two I was expected to implement. I opted to implement the 2nd option, as it seemed closer to what a real-life use-case would require a database for.
+
+# Installation and execution
+
+Check out `README.md` for details on how to install and run the app.
+
+# Test results
+
+In order to check that the program works with Llama2 running locally as well (not just with OpenAI API), I ran it once using Llama2 local installation. I couldn't gather more result, because each call was taking an extensive amount of time to run on my feeble laptop. For that reason, only the first test result below uses Llama2. The following ones use OpenAI's API.
+
+Here is the result retrieved from the database, for the QA using Llama2. The question, answer, as well as response time (in seconds) can be found for each call.
+
+```
   {
     "question": "What this Llama thing about?",
     "response": "Response:   Based on the provided context, it appears that Llama 2 is a new language model developed by Meta AI. The model has been trained on an offline dataset and is intended for commercial and research use in English. The developers have fine-tuned the model to improve its helpfulness and safety, and they have released the models to the general public for further research and commercial use.\nLlama 2 comes in different variations with varying sizes of 7B, 13B, and 70B parameters, and the developers have also trained 34B variants but are not releasing them. Llama 2-Chat is a fine-tuned version of Llama 2 that is optimized for dialogue use cases, and it has been trained on an offline dataset as well.\nThe developers have performed safety evaluations on Llama 2-Chat using human raters to assess the model's generations for safety violations across approximately 2,000 adversarial prompts. The results show that Llama 2-Chat generally performs better than existing open-source models and is on par with some closed-source models in terms of safety\nSources: ['data/books/Llama2.pdf', 'data/books/Llama2.pdf', 'data/books/Llama2.pdf', 'data/books/Llama2.pdf', 'data/books/Llama2.pdf', 'data/books/Llama2.pdf', 'data/books/Llama2.pdf']",
     "response_time_s": 2941.437656402588,
     "timestamp": "Wed, 19 Jun 2024 09:18:43 GMT"
   }
+```
 
+The following calls are made using OpenAI's API, and therefore take only a few seconds (as opposed to ~50 seconds for the locally-run Llama2 model). 
 
-
+```
   {
     "question": "What this Llama thing about?",
-    "response": "Response: The Llama 2 is a family of pretrained and fine-tuned language models (LLMs) with scales ranging from 7 billion to 70 billion parameters. These models have been developed to compete with existing open-source chat models and have shown competency equivalent to some proprietary models. However, like other LLMs, Llama 2 has limitations and ethical considerations, including potential for generating harmful, offensive, or biased content. Developers are encouraged to perform safety testing and tuning tailored to their specific applications before deploying any applications of Llama 2. Additionally, responsible use guidelines are provided for using Llama 2 safely in research and commercial applications.\nSources: ['pdf/Llama2.pdf', 'pdf/Llama2.pdf', 'pdf/Llama2.pdf', 'pdf/Llama2.pdf', 'pdf/Llama2.pdf', 'pdf/Llama2.pdf', 'pdf/Llama2.pdf']",
+    "response": "The Llama 2 is a family of pretrained and fine-tuned language models (LLMs) with scales ranging from 7 billion to 70 billion parameters. These models have been developed to compete with existing open-source chat models and have shown competency equivalent to some proprietary models. However, like other LLMs, Llama 2 has limitations and ethical considerations, including potential for generating harmful, offensive, or biased content. Developers are encouraged to perform safety testing and tuning tailored to their specific applications before deploying any applications of Llama 2. Additionally, responsible use guidelines are provided for using Llama 2 safely in research and commercial applications.",
     "response_time_s": 5.609514236450195,
     "timestamp": "Wed, 19 Jun 2024 10:38:02 GMT"
   }
-
+  
+  {
+    "question": "What are the first names of the authors Touvron, Martin and Stone?",
+    "response": "The first names of the authors Touvron, Martin, and Stone are Hugo, Louis, and Kevin respectively.",
+    "response_time_s": 1.6125853061676025,
+    "timestamp": "Wed, 19 Jun 2024 23:12:43 GMT"
+  }
+  
+  {
+    "question": "What fine-tuning methods were used, according to the Fine-tuning section?",
+    "response": "The fine-tuning methods used were Supervised Fine-Tuning (SFT) and Reinforcement Learning with Human Feedback (RLHF).",
+    "response_time_s": 1.714087963104248,
+    "timestamp": "Wed, 19 Jun 2024 23:15:43 GMT"
+  }
+  
+  {
+    "question": "What was used to ensure multi-turn consistency?",
+    "response": "Ghost Attention (GAtt) was used to ensure multi-turn consistency in the dialogue setup.",
+    "response_time_s": 1.7564263343811035,
+    "timestamp": "Wed, 19 Jun 2024 23:17:57 GMT"
+  }
+```

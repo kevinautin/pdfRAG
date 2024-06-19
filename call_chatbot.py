@@ -41,7 +41,5 @@ def call_chatbot(query_text):
     print(prompt)
 
     response_text = model.predict(prompt)
-    sources = [doc.metadata.get("source", None) for doc, _score in results]
-    formatted_response = f"Response: {response_text}\nSources: {sources}"
-    print(formatted_response)
-    return formatted_response
+    print(response_text)
+    return response_text
