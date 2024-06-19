@@ -1,11 +1,17 @@
-Questions asked to the chatbot:
-1. What is Llama 2?
-2. How does Llama 2 differ from other models?
 
-Responses received:
-1. Llama 2 is an open foundation and fine-tuned chat model developed by MetaAI.
-2. Llama 2 differs from other models in its architecture and fine-tuning approach.
+  {
+    "question": "What this Llama thing about?",
+    "response": "Response:   Based on the provided context, it appears that Llama 2 is a new language model developed by Meta AI. The model has been trained on an offline dataset and is intended for commercial and research use in English. The developers have fine-tuned the model to improve its helpfulness and safety, and they have released the models to the general public for further research and commercial use.\nLlama 2 comes in different variations with varying sizes of 7B, 13B, and 70B parameters, and the developers have also trained 34B variants but are not releasing them. Llama 2-Chat is a fine-tuned version of Llama 2 that is optimized for dialogue use cases, and it has been trained on an offline dataset as well.\nThe developers have performed safety evaluations on Llama 2-Chat using human raters to assess the model's generations for safety violations across approximately 2,000 adversarial prompts. The results show that Llama 2-Chat generally performs better than existing open-source models and is on par with some closed-source models in terms of safety\nSources: ['data/books/Llama2.pdf', 'data/books/Llama2.pdf', 'data/books/Llama2.pdf', 'data/books/Llama2.pdf', 'data/books/Llama2.pdf', 'data/books/Llama2.pdf', 'data/books/Llama2.pdf']",
+    "response_time_s": 2941.437656402588,
+    "timestamp": "Wed, 19 Jun 2024 09:18:43 GMT"
+  }
 
-Latency measured in seconds:
-1. Question 1: 0.45 seconds
-2. Question 2: 0.50 seconds
+
+
+  {
+    "question": "What this Llama thing about?",
+    "response": "Response: The Llama 2 is a family of pretrained and fine-tuned language models (LLMs) with scales ranging from 7 billion to 70 billion parameters. These models have been developed to compete with existing open-source chat models and have shown competency equivalent to some proprietary models. However, like other LLMs, Llama 2 has limitations and ethical considerations, including potential for generating harmful, offensive, or biased content. Developers are encouraged to perform safety testing and tuning tailored to their specific applications before deploying any applications of Llama 2. Additionally, responsible use guidelines are provided for using Llama 2 safely in research and commercial applications.\nSources: ['pdf/Llama2.pdf', 'pdf/Llama2.pdf', 'pdf/Llama2.pdf', 'pdf/Llama2.pdf', 'pdf/Llama2.pdf', 'pdf/Llama2.pdf', 'pdf/Llama2.pdf']",
+    "response_time_s": 5.609514236450195,
+    "timestamp": "Wed, 19 Jun 2024 10:38:02 GMT"
+  }
+

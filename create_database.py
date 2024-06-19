@@ -16,7 +16,7 @@ USE_OPENAI = os.getenv("USE_OPENAI", "False") == "True"
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 CHROMA_PATH = "chroma"
-DATA_PATH = "data/books"
+DATA_PATH = "pdf"
 
 
 def main():
