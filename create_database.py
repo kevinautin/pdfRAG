@@ -12,7 +12,7 @@ import os
 import shutil
 
 load_dotenv()
-USE_OPENAI = os.getenv("USE_OPENAI")
+USE_OPENAI = os.getenv("USE_OPENAI", "False") == "True"
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 CHROMA_PATH = "chroma"
