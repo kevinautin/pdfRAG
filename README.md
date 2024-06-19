@@ -1,6 +1,6 @@
 # Installation
 
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 Copy or rename `.env.default` as `.env`.
 
