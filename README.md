@@ -1,3 +1,7 @@
+# Introduction
+
+Retrieval-Augmented Generation to answer questions about the content of a pdf documents.
+
 # Installation
 
 `pip install -r requirements.txt`
